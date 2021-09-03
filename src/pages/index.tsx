@@ -1,6 +1,6 @@
 import type { NextPage } from 'next'
 import { FormEvent, useContext, useState } from 'react'
-import { AuthContext } from '../context/AuthContext'
+import { AuthContext } from '../contexts/AuthContext'
 import styles from '../styles/Home.module.css'
 
 const Home: NextPage = () => {
