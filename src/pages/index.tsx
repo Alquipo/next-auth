@@ -9,8 +9,8 @@ const Home: NextPage = () => {
 
   const { signIn } = useContext(AuthContext)
 
-  async function handleSubmit(e: FormEvent) {
-    e.preventDefault()
+  async function handleSubmit(event: FormEvent) {
+    event.preventDefault()
 
     const data = {
       email,
