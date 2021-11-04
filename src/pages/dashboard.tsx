@@ -1,41 +1,34 @@
 import { useContext, useEffect } from "react"
-import Router from 'next/router';
 
 import { AuthContext } from "../contexts/AuthContext"
-// import { setupAPIClient } from "../services/api";
-// import { api } from "../services/apiClient";
-// import { withSSRAuth } from "../utils/withSSRAuth"
-// import { Can } from "../components/Can";
+import { withSSRAuth } from "../utils/withSSRAuth";
+import { api } from "../services/apiClient";
+import { setupApiClient } from "../services/api";
+
 
 export default function Dashboard() {
-  // const { user, signOut, isAuthenticated } = useContext(AuthContext)
+  const { user, isAuthenticated } = useContext(AuthContext)
 
-  // useEffect(() => {
-  //   api.get('/me')
-  //     .then(response => console.log(response))
-  // }, [])
+  useEffect(() => {
+    api.get('/me')
+      .then(response => console.log(response))
+      .catch(error => console.log(error))
+  }, [])
 
   return (
     <>
-      {/* <h1>Dashboard: {user?.email}</h1> */}
-      <h1>Dashboard</h1>
-{/* 
-      <button onClick={signOut}>Sign out</button>
+      <h1>Dashboard: {user?.email}</h1>
 
-      <Can permissions={['metrics.list']}>
-        <div>Métricas</div>
-      </Can> */}
     </>
   )
 }
 
-// export const getServerSideProps = withSSRAuth(async (ctx) => {
-//   const apiClient = setupAPIClient(ctx);
-//   const response = await apiClient.get('/me');
+export const getServerSideProps = withSSRAuth(async (ctx) => {
+  const apiClient = setupApiClient(ctx);
+  const response = await apiClient.get('/me');
 
-//   console.log(response.data)
-
-//   return {
-//     props: {}
-//   }
-// })
+  
+  return {
+    props: {}
+  }
+})
