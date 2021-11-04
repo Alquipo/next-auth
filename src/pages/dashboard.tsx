@@ -6,14 +6,15 @@ import { api } from "../services/apiClient";
 import { setupApiClient } from "../services/api";
 
 
-export default function Dashboard() {
-  const { user, isAuthenticated } = useContext(AuthContext)
+export default function Dashboard({user}) {
+  // const { user } = useContext(AuthContext)
 
-  useEffect(() => {
-    api.get('/me')
-      .then(response => console.log(response))
-      .catch(error => console.log(error))
-  }, [])
+  // useEffect(() => {
+  //   api.get('/me')
+  //     .then(response => console.log(response))
+  //     .catch(error => console.log(error))
+  // }, [])
+  console.log(user)
 
   return (
     <>
@@ -25,10 +26,12 @@ export default function Dashboard() {
 
 export const getServerSideProps = withSSRAuth(async (ctx) => {
   const apiClient = setupApiClient(ctx);
-  const response = await apiClient.get('/me');
+  const {data} = await apiClient.get('/me');
 
   
   return {
-    props: {}
+    props: {
+      user: data
+    }
   }
 })
